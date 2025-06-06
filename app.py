@@ -1,16 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, jsonify, g, render_template_string
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_mail import Mail, Message
-from challenges import CHALLENGES, get_topics_by_level, get_challenges_filtered, get_challenge_by_id, get_points, get_challenges_by_topic
+import flask
+import os
 import random
 import io
 import sys
 import traceback
 import threading
 from datetime import datetime
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user, UserMixin
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_mail import Mail, Message
+from challenges import CHALLENGES, get_topics_by_level, get_challenges_filtered, get_challenge_by_id, get_points, get_challenges_by_topic
 
+# ----------------- FLASK SETUP ------------------
 app = Flask(__name__)
 app.secret_key = "super_secret_key_CSA"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///alunos.db'
@@ -29,6 +32,11 @@ db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
+print("VERSÃO DO FLASK:", flask.__version__)
+print("MODULO FLASK:", flask)
+print("CAMINHO DO MODULO FLASK:", flask.__file__)
+
+# ----------------- MODELOS ------------------
 class Aluno(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
@@ -64,10 +72,7 @@ def before_request():
         g.pontos = 0
         g.medalhas_ouro, g.medalhas_prata, g.medalhas_bronze = 0, 0, 0
 
-@app.before_first_request
-def cria_tabelas():
-    db.create_all()
-
+# ----------------- ROTAS ------------------
 @app.route("/")
 def home():
     return redirect(url_for("login"))
@@ -87,12 +92,7 @@ def cadastro():
         if Aluno.query.filter_by(email=email).first():
             flash("Email já cadastrado!")
             return redirect(url_for("cadastro"))
-        aluno = Aluno(
-            nome=nome,
-            email=email,
-            turma=turma,
-            senha_hash=generate_password_hash(senha)
-        )
+        aluno = Aluno(nome=nome, email=email, turma=turma, senha_hash=generate_password_hash(senha))
         db.session.add(aluno)
         db.session.commit()
         flash("Cadastro realizado com sucesso! Faça login.")
@@ -141,10 +141,9 @@ def select():
 @app.route("/get_topics/<level>")
 @login_required
 def get_topics(level):
-    topics = get_topics_by_level(level)
-    return jsonify(topics)
+    return jsonify(get_topics_by_level(level))
 
-@app.route("/challenge/<cid>", methods=["GET"])
+@app.route("/challenge/<cid>")
 @login_required
 def challenge(cid):
     challenge = get_challenge_by_id(cid)
@@ -169,6 +168,7 @@ def run_code():
     pontuou = False
     acertou_primeira = False
     acertou_segunda = False
+
     if sucesso:
         if not progresso:
             progresso = Progresso(aluno_id=current_user.id, desafio_id=cid, tentativas=1, nota=get_points(get_challenge_by_id(cid)), last_code=code)
@@ -193,24 +193,20 @@ def run_code():
             db.session.commit()
         pontos = sum(p.nota for p in Progresso.query.filter_by(aluno_id=current_user.id).all())
 
-    # --- ENVIAR RELATÓRIO POR E-MAIL SE FINALIZOU UM ASSUNTO ---
     if sucesso and pontuou:
         challenge = get_challenge_by_id(cid)
         assunto = challenge['topic']
-        from challenges import get_challenges_by_topic
         desafios_do_assunto = get_challenges_by_topic(assunto)
         ids_do_assunto = set(d['id'] for d in desafios_do_assunto)
         progresso_ids = set(p.desafio_id for p in Progresso.query.filter_by(aluno_id=current_user.id).all() if p.nota > 0)
         ja_enviado = EmailRelatorio.query.filter_by(aluno_id=current_user.id, assunto=assunto).first()
-        if ids_do_assunto and ids_do_assunto.issubset(progresso_ids) and not ja_enviado:
+        if ids_do_assunto.issubset(progresso_ids) and not ja_enviado:
             desafios_pontuados = [d for d in desafios_do_assunto if d['id'] in progresso_ids]
             pontos_assunto = sum(d['points'] for d in desafios_pontuados)
             send_subject_report(current_user, assunto, desafios_pontuados, pontos_assunto)
             db.session.add(EmailRelatorio(aluno_id=current_user.id, assunto=assunto))
             db.session.commit()
-    # --- FIM ENVIO EMAIL ---
 
-    # Recalcular medalhas após submissão
     g.medalhas_ouro, g.medalhas_prata, g.medalhas_bronze = calcular_medalhas(current_user.id)
 
     return jsonify({
@@ -224,6 +220,19 @@ def run_code():
         "medalhas_bronze": g.medalhas_bronze
     })
 
+@app.route("/apostilas")
+@login_required
+def apostilas():
+    return render_template("apostilas.html")
+
+@app.route("/historico")
+@login_required
+def historico():
+    progresso = Progresso.query.filter_by(aluno_id=current_user.id).all()
+    desafios = [(get_challenge_by_id(p.desafio_id), p) for p in progresso]
+    return render_template("historico.html", desafios=desafios, aluno=current_user)
+
+# ----------------- FUNÇÕES AUXILIARES ------------------
 def calcular_medalhas(aluno_id):
     progresso = Progresso.query.filter_by(aluno_id=aluno_id).all()
     ouro = prata = bronze = 0
@@ -269,12 +278,12 @@ def exec_student_code(code, input_data=""):
     return output, error
 
 def send_subject_report(aluno, subject, desafios, pontos_total):
-    from flask import render_template_string
     try:
         import pytz
         datahora = datetime.now(pytz.timezone('America/Sao_Paulo')).strftime('%d/%m/%Y %H:%M')
     except Exception:
         datahora = datetime.now().strftime('%d/%m/%Y %H:%M')
+
     html = render_template_string("""
     <h2>Relatório de conclusão de assunto</h2>
     <b>Aluno:</b> {{ aluno.nome }}<br>
@@ -292,30 +301,20 @@ def send_subject_report(aluno, subject, desafios, pontos_total):
     </ul>
     """, aluno=aluno, subject=subject, desafios=desafios, pontos_total=pontos_total, datahora=datahora)
 
-    subject_email = f"[Relatório] {aluno.nome} finalizou o assunto {subject}"
-    recipients = ['SEU_EMAIL@dominio.com', aluno.email]
     msg = Message(
-        subject=subject_email,
-        recipients=recipients,
+        subject=f"[Relatório] {aluno.nome} finalizou o assunto {subject}",
+        recipients=['SEU_EMAIL@dominio.com', aluno.email],
         html=html
     )
     mail.send(msg)
 
-@app.route("/apostilas")
-@login_required
-def apostilas():
-    return render_template("apostilas.html")
+# ----------------- INICIALIZAÇÃO DO BANCO ------------------
+def inicializa_banco():
+    with app.app_context():
+        db.create_all()
 
-@app.route("/historico")
-@login_required
-def historico():
-    progresso = Progresso.query.filter_by(aluno_id=current_user.id).all()
-    desafios = [(get_challenge_by_id(p.desafio_id), p) for p in progresso]
-    return render_template("historico.html", desafios=desafios, aluno=current_user)
-
-# --------- IMPORTANTE: Ponto de entrada ---------
-# Render usa gunicorn app:app como padrão!
-# No local (VSCode), rode: python app.py
 if __name__ == "__main__":
-    # Localhost: debug ativo, porta padrão
+    inicializa_banco()
     app.run(host="0.0.0.0", port=5000, debug=True)
+elif os.environ.get("RENDER") == "true" or "RENDER_EXTERNAL_HOSTNAME" in os.environ:
+    inicializa_banco()
