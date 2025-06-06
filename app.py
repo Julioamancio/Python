@@ -25,9 +25,7 @@ app.config['MAIL_PASSWORD'] = 'SUA_SENHA_DE_APLICATIVO'
 app.config['MAIL_DEFAULT_SENDER'] = 'SEU_EMAIL@dominio.com'
 
 mail = Mail(app)
-
 db = SQLAlchemy(app)
-
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
@@ -77,7 +75,6 @@ def home():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    # Medalhas já colocadas no g pelo before_request
     return render_template("dashboard.html")
 
 @app.route("/cadastro", methods=["GET", "POST"])
@@ -296,7 +293,6 @@ def send_subject_report(aluno, subject, desafios, pontos_total):
     """, aluno=aluno, subject=subject, desafios=desafios, pontos_total=pontos_total, datahora=datahora)
 
     subject_email = f"[Relatório] {aluno.nome} finalizou o assunto {subject}"
-    # Envie para você e para o aluno
     recipients = ['SEU_EMAIL@dominio.com', aluno.email]
     msg = Message(
         subject=subject_email,
@@ -317,5 +313,9 @@ def historico():
     desafios = [(get_challenge_by_id(p.desafio_id), p) for p in progresso]
     return render_template("historico.html", desafios=desafios, aluno=current_user)
 
+# --------- IMPORTANTE: Ponto de entrada ---------
+# Render usa gunicorn app:app como padrão!
+# No local (VSCode), rode: python app.py
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Localhost: debug ativo, porta padrão
+    app.run(host="0.0.0.0", port=5000, debug=True)
