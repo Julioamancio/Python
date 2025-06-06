@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height:calc(100vh - 56px)">
+    <div class="card main-card border-0 w-100 position-relative">
+        <div class="card-header bg-primary text-white text-center">
+            <i class="fa-solid fa-right-to-bracket me-2"></i> Login
+        </div>
+        <div class="card-body bg-white">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required autofocus>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Senha</label>
+                    <input name="senha" type="password" class="form-control" required>
+                </div>
+                <button class="btn btn-primary w-100"><i class="fa-solid fa-sign-in-alt"></i> Entrar</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{{ url_for('cadastro') }}">Não tem cadastro? Registrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

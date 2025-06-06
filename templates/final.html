@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Concluído - Desafios Python CSA{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <i class="fa-solid fa-trophy"></i> Parabéns, {{ student_name }}!
+            </div>
+            <div class="card-body text-center">
+                <h4>Você completou {{ points }} pontos!</h4>
+                <p><i class="fa-solid fa-user-graduate fa-2x text-success"></i></p>
+                <p>Turma: <strong>{{ student_class }}</strong></p>
+                <p><span class="badge bg-success fs-5"><i class="fa-solid fa-medal"></i> Desafio Finalizado</span></p>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary mt-3"><i class="fa-solid fa-arrow-left"></i> Novo Aluno</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

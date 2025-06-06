@@ -1,0 +1,478 @@
+<!-- Extra – Tópicos Profissionais / Técnicos (3 exemplos por tópico) -->
+
+<!-- CONEXÃO COM BANCOS DE DADOS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-database text-primary"></i>
+    <span class="topic-text">Conexão com Bancos de Dados (SQLite, MySQL)</span>
+</div>
+<p class="fs-3 mb-4">
+    Para salvar dados permanentemente ou compartilhar entre programas, usamos bancos de dados. O <code>sqlite3</code> é nativo do Python, leve e não precisa de servidor. O <code>sqlalchemy</code> é uma biblioteca que facilita trabalhar com banco de dados de forma mais profissional e compatível com vários tipos (MySQL, PostgreSQL, etc).
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (SQLite básico):</b>
+    <pre># Cria banco SQLite e salva uma pessoa
+import sqlite3
+conn = sqlite3.connect("meubanco.db")  # Cria/abre arquivo de banco
+c = conn.cursor()                      # Cria cursor para comandos SQL
+c.execute("CREATE TABLE IF NOT EXISTS pessoas (nome TEXT)")  # Cria tabela se não existir
+c.execute("INSERT INTO pessoas VALUES ('Ana')")              # Insere registro
+conn.commit()                        # Salva alterações
+conn.close()                         # Fecha conexão</pre>
+    <b>Exemplo 2 (Leitura com SQLite):</b>
+    <pre># Lê registros do banco criado
+import sqlite3
+conn = sqlite3.connect("meubanco.db")
+c = conn.cursor()
+for linha in c.execute("SELECT * FROM pessoas"):  # Busca todos os registros
+    print(linha)
+conn.close()</pre>
+    <b>Exemplo 3 (SQLAlchemy):</b>
+    <pre># SQLAlchemy facilita trabalhar com diferentes bancos (ex: SQLite, MySQL)
+from sqlalchemy import create_engine, text
+engine = create_engine("sqlite:///meubanco.db")  # Conexão compatível com SQLAlchemy
+with engine.connect() as conn:
+    conn.execute(text("CREATE TABLE IF NOT EXISTS teste (x INT)"))  # Executa comando SQL
+</pre>
+</div>
+
+<!-- INTERFACES GRÁFICAS (tkinter, PyQt) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-window-maximize text-success"></i>
+    <span class="topic-text">Interfaces Gráficas (tkinter, PyQt)</span>
+</div>
+<p class="fs-3 mb-4">
+    Interfaces gráficas permitem criar programas com janelas, botões, caixas de texto e outros componentes visuais. <code>tkinter</code> é nativo do Python, enquanto <code>PyQt</code> é um framework mais avançado e profissional.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (Tkinter):</b>
+    <pre># Janela com mensagem
+import tkinter as tk
+root = tk.Tk()
+tk.Label(root, text="Olá!").pack()
+root.mainloop()</pre>
+    <b>Exemplo 2 (Tkinter botão):</b>
+    <pre># Botão que imprime mensagem ao clicar
+import tkinter as tk
+def clique():
+    print("Clicou!")
+janela = tk.Tk()
+tk.Button(janela, text="Clique", command=clique).pack()
+janela.mainloop()</pre>
+    <b>Exemplo 3 (PyQt5):</b>
+    <pre># Janela PyQt5 (precisa instalar PyQt5)
+from PyQt5.QtWidgets import QApplication, QLabel
+app = QApplication([])
+label = QLabel("Olá, PyQt!")
+label.show()
+app.exec()</pre>
+</div>
+
+<!-- WEB SCRAPING (requests, BeautifulSoup) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-spider text-warning"></i>
+    <span class="topic-text">Web Scraping (requests, BeautifulSoup)</span>
+</div>
+<p class="fs-3 mb-4">
+    Web scraping é a técnica de extrair informações de páginas da internet de forma automática. <code>requests</code> baixa o conteúdo, <code>BeautifulSoup</code> analisa o HTML e busca dados específicos.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (requests):</b>
+    <pre># Baixa e mostra parte do HTML da página
+import requests
+resp = requests.get("https://www.example.com")
+print(resp.text[:100])</pre>
+    <b>Exemplo 2 (BeautifulSoup):</b>
+    <pre># Mostra o título da página python.org
+from bs4 import BeautifulSoup
+import requests
+html = requests.get("https://www.python.org").text
+soup = BeautifulSoup(html, "html.parser")
+print(soup.title.text)</pre>
+    <b>Exemplo 3 (links com BeautifulSoup):</b>
+    <pre># Lista todos os links da página
+from bs4 import BeautifulSoup
+import requests
+html = requests.get("https://www.python.org").text
+soup = BeautifulSoup(html, "html.parser")
+for a in soup.find_all("a"):
+    print(a.get("href"))</pre>
+</div>
+
+<!-- APIs REST (criação e consumo) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-cloud text-info"></i>
+    <span class="topic-text">APIs REST (criação e consumo)</span>
+</div>
+<p class="fs-3 mb-4">
+    APIs REST permitem que programas conversem pela internet, usando HTTP. Você pode consumir APIs prontas (buscar dados) ou criar as suas (expor funcionalidades).
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (consumindo API):</b>
+    <pre># Usa requests para buscar dados de uma API pública
+import requests
+r = requests.get("https://jsonplaceholder.typicode.com/todos/1")
+print(r.json())</pre>
+    <b>Exemplo 2 (Flask API):</b>
+    <pre># Cria uma API simples com Flask
+from flask import Flask, jsonify
+app = Flask(__name__)
+@app.route("/api")
+def api():
+    return jsonify({"msg": "Hello"})
+# app.run()</pre>
+    <b>Exemplo 3 (requisição POST):</b>
+    <pre># Envia dados para API simulada usando POST
+import requests
+r = requests.post("https://httpbin.org/post", data={"nome": "Julio"})
+print(r.json())</pre>
+</div>
+
+<!-- DESENVOLVIMENTO WEB (Flask ou Django) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-globe text-primary"></i>
+    <span class="topic-text">Desenvolvimento Web (Flask ou Django)</span>
+</div>
+<p class="fs-3 mb-4">
+    O desenvolvimento web em Python é feito com frameworks como <code>Flask</code> (leve e simples) ou <code>Django</code> (robusto e completo). Eles permitem criar sites dinâmicos, APIs e sistemas completos.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (Flask app):</b>
+    <pre># Pequeno site com Flask
+from flask import Flask
+app = Flask(__name__)
+@app.route("/")
+def home():
+    return "Bem-vindo!"
+# app.run()</pre>
+    <b>Exemplo 2 (Django view):</b>
+    <pre># Função de resposta em Django (em views.py)
+from django.http import HttpResponse
+def home(request):
+    return HttpResponse("Olá Django!")</pre>
+    <b>Exemplo 3 (Flask com template):</b>
+    <pre># Mostra página HTML usando template Flask
+from flask import Flask, render_template
+app = Flask(__name__)
+@app.route("/")
+def index():
+    return render_template("index.html")
+# app.run()</pre>
+</div>
+
+<!-- AUTOMAÇÃO DE TAREFAS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-robot text-success"></i>
+    <span class="topic-text">Automação de Tarefas</span>
+</div>
+<p class="fs-3 mb-4">
+    Automatizar tarefas significa criar scripts que realizam trabalhos repetitivos, economizando tempo e evitando erros humanos.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (renomear arquivos):</b>
+    <pre># Renomeia todos arquivos .txt para arquivo_0.txt, arquivo_1.txt, etc
+import os
+for i, f in enumerate(os.listdir(".")):
+    if f.endswith(".txt"):
+        os.rename(f, f"arquivo_{i}.txt")</pre>
+    <b>Exemplo 2 (enviar e-mail):</b>
+    <pre># Envia e-mail SMTP (exige configuração real)
+import smtplib
+s = smtplib.SMTP("smtp.gmail.com", 587)
+s.starttls()
+# s.login("seu_email", "senha")
+# s.sendmail("de", "para", "Mensagem")
+s.quit()</pre>
+    <b>Exemplo 3 (baixar imagem):</b>
+    <pre># Baixa imagem da internet
+import requests
+r = requests.get("https://www.python.org/static/img/python-logo.png")
+with open("logo.png", "wb") as f:
+    f.write(r.content)</pre>
+</div>
+
+<!-- THREADS E PROCESSOS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-diagram-project text-warning"></i>
+    <span class="topic-text">Threads e Processos (<code>threading</code>, <code>multiprocessing</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Threads e processos permitem executar tarefas em paralelo, melhorando a performance em tarefas pesadas ou demoradas. <code>threading</code> é para tarefas simultâneas leves, <code>multiprocessing</code> para processos realmente separados.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (thread):</b>
+    <pre># Executa função em thread separada
+import threading
+def tarefa():
+    print("Executando em thread")
+t = threading.Thread(target=tarefa)
+t.start()
+t.join()</pre>
+    <b>Exemplo 2 (múltiplas threads):</b>
+    <pre># 3 threads simultâneas, imprimindo valores
+import threading
+for i in range(3):
+    threading.Thread(target=lambda: print(i)).start()</pre>
+    <b>Exemplo 3 (processo):</b>
+    <pre># Processo separado do principal
+from multiprocessing import Process
+def tarefa():
+    print("Processo novo!")
+p = Process(target=tarefa)
+p.start()
+p.join()</pre>
+</div>
+
+<!-- PROGRAMAÇÃO ASSÍNCRONA (async, await) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-clock-rotate-left text-info"></i>
+    <span class="topic-text">Programação Assíncrona (<code>async</code>, <code>await</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Programação assíncrona permite rodar várias tarefas que dependem de respostas externas (como internet) sem travar o programa. <code>async</code> define funções assíncronas, <code>await</code> espera uma resposta.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Função assíncrona simples
+import asyncio
+async def main():
+    print("Oi")
+asyncio.run(main())</pre>
+    <b>Exemplo 2:</b>
+    <pre># Espera 1 segundo de forma não bloqueante
+import asyncio
+async def espera():
+    await asyncio.sleep(1)
+    print("Depois de 1 segundo")
+asyncio.run(espera())</pre>
+    <b>Exemplo 3:</b>
+    <pre># Executa duas tarefas "ao mesmo tempo"
+import asyncio
+async def tarefa(i):
+    await asyncio.sleep(i)
+    print(f"Tarefa {i} pronta")
+async def main():
+    await asyncio.gather(tarefa(1), tarefa(2))
+asyncio.run(main())</pre>
+</div>
+
+<!-- AMBIENTES VIRTUAIS (venv, pip) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-cubes text-primary"></i>
+    <span class="topic-text">Ambientes Virtuais (<code>venv</code>, <code>pip</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Ambientes virtuais isolam as bibliotecas de cada projeto, evitando conflitos e facilitando a manutenção. <code>venv</code> cria ambientes, <code>pip</code> instala bibliotecas apenas dentro do ambiente ativado.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (criar venv):</b>
+    <pre># Cria ambiente virtual
+python -m venv venv
+# Ativar no Windows: venv\Scripts\activate
+# Ativar no Linux/Mac: source venv/bin/activate</pre>
+    <b>Exemplo 2 (instalar pacote):</b>
+    <pre># Instala pacote para o projeto
+pip install requests
+pip list</pre>
+    <b>Exemplo 3 (desativar ambiente):</b>
+    <pre># Sai do ambiente virtual
+deactivate</pre>
+</div>
+
+<!-- CONTROLE DE DEPENDÊNCIAS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-file-lines text-success"></i>
+    <span class="topic-text">Controle de Dependências (<code>requirements.txt</code>, <code>pip freeze</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Para garantir que todos os pacotes usados no projeto possam ser instalados em outro ambiente, use <code>pip freeze</code> para gerar um arquivo <code>requirements.txt</code> com as versões. Use esse arquivo para instalar tudo de uma vez.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (gerar requirements):</b>
+    <pre># Gera lista de dependências instaladas
+pip freeze > requirements.txt</pre>
+    <b>Exemplo 2 (instalar todas):</b>
+    <pre># Instala todas as dependências listadas
+pip install -r requirements.txt</pre>
+    <b>Exemplo 3 (conteúdo típico):</b>
+    <pre># requirements.txt pode conter:
+requests==2.31.0
+Flask==3.0.2</pre>
+</div>
+
+<!-- PUBLICAÇÃO DE PACOTES (setuptools, PyPI) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-upload text-warning"></i>
+    <span class="topic-text">Publicação de Pacotes (<code>setuptools</code>, <code>PyPI</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Você pode empacotar seu projeto Python e publicar no PyPI (Python Package Index), permitindo que qualquer pessoa instale com pip. <code>setuptools</code> ajuda a empacotar, <code>twine</code> faz o upload.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (setup.py):</b>
+    <pre># Script de configuração do seu pacote
+from setuptools import setup
+setup(name="meupacote", version="0.1", py_modules=["meupacote"])</pre>
+    <b>Exemplo 2 (build e upload):</b>
+    <pre># Gera os arquivos de distribuição e faz upload para o PyPI
+python setup.py sdist bdist_wheel
+twine upload dist/*</pre>
+    <b>Exemplo 3 (instalar do PyPI):</b>
+    <pre># Qualquer usuário pode instalar seu pacote
+pip install nome-do-pacote</pre>
+</div>
+
+<!-- DESAFIO FINAL DO EXTRA / PROFISSIONAL -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-trophy text-success"></i>
+    <span class="topic-text">Desafio Final do Módulo Profissional</span>
+</div>
+<p class="fs-3 mb-3">
+    <b>Desafio:</b>
+</p>
+<ul class="fs-3 mb-4">
+    <li>Crie um programa profissional que:</li>
+    <li>Crie um banco de dados SQLite para cadastro de clientes com nome e e-mail</li>
+    <li>Tenha uma interface gráfica simples (Tkinter) para cadastrar e listar clientes</li>
+    <li>Implemente função para exportar os dados para um arquivo <code>clientes.csv</code></li>
+    <li>Use organização modular em funções ou classes</li>
+</ul>
+<div class="example-block mb-5">
+    <b>Solução sugerida (comentada):</b>
+    <pre>
+import sqlite3
+import tkinter as tk
+from tkinter import messagebox
+import csv
+
+# Cria banco e tabela se não existir
+def criar_banco():
+    conn = sqlite3.connect("clientes.db")
+    c = conn.cursor()
+    c.execute("CREATE TABLE IF NOT EXISTS clientes (nome TEXT, email TEXT)")
+    conn.commit()
+    conn.close()
+
+# Salva um novo cliente
+def salvar_cliente(nome, email):
+    conn = sqlite3.connect("clientes.db")
+    c = conn.cursor()
+    c.execute("INSERT INTO clientes VALUES (?, ?)", (nome, email))
+    conn.commit()
+    conn.close()
+
+# Retorna lista de todos os clientes
+def listar_clientes():
+    conn = sqlite3.connect("clientes.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM clientes")
+    clientes = c.fetchall()
+    conn.close()
+    return clientes
+
+# Exporta clientes para CSV
+def exportar_csv():
+    clientes = listar_clientes()
+    with open("clientes.csv", "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Nome", "Email"])
+        writer.writerows(clientes)
+    messagebox.showinfo("Exportação", "Exportado para clientes.csv!")
+
+# Função chamada ao clicar em "Cadastrar"
+def cadastrar():
+    nome = entry_nome.get()
+    email = entry_email.get()
+    if nome and email:
+        salvar_cliente(nome, email)
+        entry_nome.delete(0, tk.END)
+        entry_email.delete(0, tk.END)
+        messagebox.showinfo("Cadastro", "Cliente salvo!")
+        mostrar_clientes()
+    else:
+        messagebox.showwarning("Atenção", "Preencha todos os campos.")
+
+# Atualiza a lista de clientes na interface
+def mostrar_clientes():
+    lista.delete(0, tk.END)
+    for nome, email in listar_clientes():
+        lista.insert(tk.END, f"{nome} - {email}")
+
+criar_banco()
+root = tk.Tk()
+root.title("Cadastro de Clientes")
+
+tk.Label(root, text="Nome:").pack()
+entry_nome = tk.Entry(root)
+entry_nome.pack()
+
+tk.Label(root, text="E-mail:").pack()
+entry_email = tk.Entry(root)
+entry_email.pack()
+
+tk.Button(root, text="Cadastrar", command=cadastrar).pack(pady=4)
+tk.Button(root, text="Exportar CSV", command=exportar_csv).pack(pady=4)
+
+lista = tk.Listbox(root, width=40)
+lista.pack(pady=6)
+mostrar_clientes()
+
+root.mainloop()
+    </pre>
+</div>
+
+<style>
+.topic-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #1976d2;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+.topic-title .fa-solid {
+    font-size: 2.1rem;
+}
+.topic-title .topic-text {
+    font-size: 2.3rem;
+}
+.code-pill {
+    background: #e3f2fd;
+    border-radius: 7px;
+    padding: 5px 16px;
+    font-size: 1.22rem;
+    color: #1976d2;
+    margin-left: 7px;
+    margin-right: 7px;
+    font-family: 'Fira Mono', monospace;
+}
+.example-block {
+    background: #fffbe7;
+    border-left: 6px solid #ffd600;
+    border-radius: 14px;
+    padding: 20px 36px 17px 36px;
+    font-size: 1.29rem;
+    margin-top: 10px;
+}
+.example-block pre {
+    background: #e3f2fd;
+    border-radius: 9px;
+    font-size: 1.21rem;
+    padding: 10px 16px;
+    margin-bottom: 13px;
+    margin-top: 7px;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+}
+.fs-3 { font-size: 1.55rem !important; }
+ul.fs-3 li { margin-bottom: 6px; }
+@media (max-width: 1200px) {
+    .example-block { padding-left: 10px; padding-right: 10px;}
+}
+@media (max-width: 900px) {
+    .topic-title { font-size: 1.3rem; }
+    .topic-title .fa-solid { font-size: 1.25rem; }
+    .topic-title .topic-text { font-size: 1.19rem;}
+    .fs-3 { font-size: 1.10rem !important; }
+    .example-block { font-size: 1.09rem;}
+}
+</style>

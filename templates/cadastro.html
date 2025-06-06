@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Cadastro{% endblock %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height:calc(100vh - 56px)">
+    <div class="card main-card border-0 w-100 position-relative">
+        <div class="card-header bg-info text-white text-center">
+            <i class="fa-solid fa-user-plus me-2"></i> Cadastro
+        </div>
+        <div class="card-body bg-white">
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input name="nome" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Turma</label>
+                    <input name="turma" class="form-control" placeholder="Ex: 1A" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Senha</label>
+                    <input name="senha" type="password" class="form-control" required>
+                </div>
+                <button class="btn btn-info w-100"><i class="fa-solid fa-user-plus"></i> Cadastrar</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{{ url_for('login') }}">Já tem cadastro? Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

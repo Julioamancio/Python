@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Cadastro - Desafios Python{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow p-4">
+            <h3 class="mb-3">Cadastro do Aluno</h3>
+            <form method="post">
+                <div class="mb-3">
+                    <label for="student_name" class="form-label">Nome completo</label>
+                    <input type="text" class="form-control" id="student_name" name="student_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="student_email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="student_email" name="student_email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="student_class" class="form-label">Turma (ex: 2A)</label>
+                    <input type="text" class="form-control" id="student_class" name="student_class" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100">Entrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

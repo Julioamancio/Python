@@ -1,0 +1,674 @@
+<!-- Módulo: Bibliotecas Python Mais Usadas -->
+
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-cubes-stacked text-primary"></i>
+    <span class="topic-text">Bibliotecas Python Mais Usadas</span>
+</div>
+<p class="fs-3 mb-4">
+    Python possui milhares de bibliotecas para acelerar o desenvolvimento. Aqui estão as mais populares para iniciantes e profissionais, detalhando como importar, para que servem e exemplos de uso comentados.
+</p>
+
+<!-- random -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-shuffle text-success"></i>
+    <span class="topic-text">random</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Geração de números aleatórios, sorteios, escolhas aleatórias em listas e embaralhamento de itens. Essencial para jogos, simulações e testes.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import random</pre>
+    <b>Exemplo:</b>
+    <pre># Número inteiro aleatório de 1 a 10
+print(random.randint(1, 10))
+
+# Escolhe um elemento aleatório de uma lista
+print(random.choice(['a', 'b', 'c']))
+
+# Embaralha uma lista (altera a lista original)
+lista = [1, 2, 3, 4]
+random.shuffle(lista)
+print(lista)
+</pre>
+</div>
+
+<!-- os -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-folder-open text-info"></i>
+    <span class="topic-text">os</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Permite interagir com o sistema operacional para manipular pastas, arquivos, variáveis de ambiente e executar comandos do sistema.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import os</pre>
+    <b>Exemplo:</b>
+    <pre># Lista arquivos e pastas do diretório atual
+print(os.listdir("."))
+
+# Cria uma nova pasta chamada "nova_pasta"
+os.mkdir("nova_pasta")
+
+# Mostra o caminho do diretório atual
+print(os.getcwd())
+</pre>
+</div>
+
+<!-- sys -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-gears text-secondary"></i>
+    <span class="topic-text">sys</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Gerencia recursos do interpretador Python, como argumentos da linha de comando, saída padrão e encerramento do programa.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import sys</pre>
+    <b>Exemplo:</b>
+    <pre># Exibe a versão do Python em uso
+print(sys.version)
+
+# Mostra os argumentos passados ao rodar o script
+print(sys.argv)
+
+# Encerra o programa imediatamente
+# sys.exit()  # descomente para testar
+</pre>
+</div>
+
+<!-- datetime -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-calendar-days text-warning"></i>
+    <span class="topic-text">datetime</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Manipulação de datas e horários: obter data/hora atual, calcular diferenças, criar datas e formatar para texto.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>from datetime import datetime, timedelta</pre>
+    <b>Exemplo:</b>
+    <pre># Data/hora atual formatada
+agora = datetime.now()
+print(agora.strftime("%d/%m/%Y %H:%M"))
+
+# Soma 1 dia à data atual
+amanha = agora + timedelta(days=1)
+print(amanha)
+</pre>
+</div>
+
+<!-- time -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-clock text-info"></i>
+    <span class="topic-text">time</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Medição de tempo, pausas (delays), cronômetros e manipulação de timestamps UNIX.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import time</pre>
+    <b>Exemplo:</b>
+    <pre># Timestamp atual (segundos desde 1970)
+print(time.time())
+
+# Pausa a execução por 2 segundos
+time.sleep(2)
+
+# Mostra data e hora atual em formato legível
+print(time.ctime())
+</pre>
+</div>
+
+<!-- math -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-square-root-variable text-success"></i>
+    <span class="topic-text">math</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Oferece funções matemáticas avançadas: raiz, seno, fatorial, pi, exponencial, arredondamentos e mais.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import math</pre>
+    <b>Exemplo:</b>
+    <pre># Raiz quadrada de 25
+print(math.sqrt(25))
+
+# Fatorial de 5 (5!)
+print(math.factorial(5))
+
+# Valor de pi (3.14159...)
+print(math.pi)
+</pre>
+</div>
+
+<!-- json -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-code text-warning"></i>
+    <span class="topic-text">json</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Ler, gravar e converter dados em formato JSON (padrão para APIs e integração entre sistemas).
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import json</pre>
+    <b>Exemplo:</b>
+    <pre># Converte dicionário para string JSON
+d = {"a": 1, "b": 2}
+s = json.dumps(d)
+print(s)
+
+# Converte string JSON para dicionário
+print(json.loads(s))
+
+# Salva dicionário em arquivo JSON
+with open("arq.json", "w") as f:
+    json.dump(d, f)
+</pre>
+</div>
+
+<!-- csv -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-file-csv text-warning"></i>
+    <span class="topic-text">csv</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Ler e escrever arquivos CSV (planilhas), muito usado para exportar/importar dados entre sistemas.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import csv</pre>
+    <b>Exemplo:</b>
+    <pre># Lê arquivo CSV linha por linha
+with open("arq.csv") as f:
+    reader = csv.reader(f)
+    for row in reader:
+        print(row)
+</pre>
+</div>
+
+<!-- re -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-asterisk text-secondary"></i>
+    <span class="topic-text">re</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Expressões regulares: buscar, substituir e validar padrões em textos, como e-mails, telefones, etc.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import re</pre>
+    <b>Exemplo:</b>
+    <pre># Verifica se começa com número
+print(bool(re.match(r"\d+", "123")))
+
+# Substitui espaços por hífens em um texto
+print(re.sub(r"\s", "-", "a b c"))
+</pre>
+</div>
+
+<!-- string -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-font text-success"></i>
+    <span class="topic-text">string</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Oferece funções, constantes e utilitários para manipulação avançada de textos e caracteres.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import string</pre>
+    <b>Exemplo:</b>
+    <pre># Letras maiúsculas e minúsculas
+print(string.ascii_letters)
+
+# Dígitos de 0 a 9
+print(string.digits)
+
+# Todos os caracteres de pontuação
+print(string.punctuation)
+</pre>
+</div>
+
+<!-- copy -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-clone text-info"></i>
+    <span class="topic-text">copy</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Permite copiar objetos (listas, dicionários) sem afetar o original, útil para trabalhar com dados mutáveis.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import copy</pre>
+    <b>Exemplo:</b>
+    <pre># Cópia rasa (só a lista)
+lista1 = [1,2,3]
+lista2 = copy.copy(lista1)
+
+# Cópia profunda (listas aninhadas também)
+lista3 = copy.deepcopy(lista1)
+</pre>
+</div>
+
+<!-- collections -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-boxes-stacked text-warning"></i>
+    <span class="topic-text">collections</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Tipos de dados avançados: dicionários com valor padrão, contadores de itens, filas (deque), pilhas e mais.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>from collections import Counter, defaultdict, deque</pre>
+    <b>Exemplo:</b>
+    <pre># Conta letras em uma palavra
+print(Counter("banana"))
+
+# Dicionário com valor padrão int (0)
+d = defaultdict(int)
+d["x"] += 5
+
+# Fila onde é possível adicionar no início
+fila = deque([1,2,3])
+fila.appendleft(0)
+print(fila)
+</pre>
+</div>
+
+<!-- itertools -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-infinity text-info"></i>
+    <span class="topic-text">itertools</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Funções para criar e manipular iteradores, combinações, permutações e ciclos infinitos de forma eficiente.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>from itertools import permutations, cycle, count</pre>
+    <b>Exemplo:</b>
+    <pre># Gera todas as permutações de tamanho 2
+print(list(permutations([1,2,3], 2)))
+
+# Ciclo infinito entre os valores (A, B, A, B...)
+for n in cycle("AB"):
+    print(n)
+    break  # Evita loop infinito no exemplo
+</pre>
+</div>
+
+<!-- functools -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-hammer text-success"></i>
+    <span class="topic-text">functools</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Ferramentas para programação funcional: acumuladores, decoradores, cache de funções e mais.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>from functools import reduce, lru_cache</pre>
+    <b>Exemplo:</b>
+    <pre># Soma acumulada dos valores
+print(reduce(lambda x, y: x+y, [1,2,3]))
+
+# Cache automático para funções recursivas (exemplo: Fibonacci)
+@lru_cache
+def fib(n): return n if n<2 else fib(n-1)+fib(n-2)
+print([fib(i) for i in range(7)])
+</pre>
+</div>
+
+<!-- pygame -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-gamepad text-info"></i>
+    <span class="topic-text">pygame</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Biblioteca para criar jogos, animações e multimídia, com recursos para gráficos, sons e controle de teclado/mouse.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import pygame</pre>
+    <b>Exemplo:</b>
+    <pre># Inicializa pygame e cria uma janela de 400x300
+pygame.init()
+tela = pygame.display.set_mode((400, 300))
+pygame.display.set_caption("Jogo!")
+pygame.quit()
+</pre>
+</div>
+
+<!-- numpy -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-chart-simple text-primary"></i>
+    <span class="topic-text">numpy</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Biblioteca fundamental para computação científica, matemática, inteligência artificial e manipulação eficiente de arrays/matrizes.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import numpy as np</pre>
+    <b>Exemplo:</b>
+    <pre># Cria array e faz operações vetoriais
+arr = np.array([1, 2, 3])
+print(arr * 2)          # [2 4 6]
+print(np.mean(arr))     # Média dos valores
+</pre>
+</div>
+
+<!-- pandas -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-table text-warning"></i>
+    <span class="topic-text">pandas</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Manipulação e análise de dados em tabelas (DataFrames). Importa, trata e exporta dados de CSV, Excel, SQL e outros.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import pandas as pd</pre>
+    <b>Exemplo:</b>
+    <pre># Lê arquivo CSV em um DataFrame
+df = pd.read_csv("dados.csv")
+print(df.head())         # Mostra as primeiras linhas
+print(df["coluna"].mean())  # Média de uma coluna
+</pre>
+</div>
+
+<!-- matplotlib -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-chart-column text-success"></i>
+    <span class="topic-text">matplotlib</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Criação de gráficos e visualizações (linha, barras, pizza, dispersão). Muito usada em análise e apresentação de dados.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import matplotlib.pyplot as plt</pre>
+    <b>Exemplo:</b>
+    <pre># Cria gráfico de linha simples
+plt.plot([1, 2, 3], [5, 3, 9])
+plt.title("Meu gráfico")
+plt.show()
+</pre>
+</div>
+
+<!-- requests -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-earth-americas text-primary"></i>
+    <span class="topic-text">requests</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Faz requisições HTTP/HTTPS facilmente. Usada para consumir APIs, baixar arquivos e interagir com serviços web.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import requests</pre>
+    <b>Exemplo:</b>
+    <pre># Faz requisição GET e exibe status e conteúdo
+resp = requests.get("https://www.example.com")
+print(resp.status_code)  # Código de status HTTP (200, 404, etc)
+print(resp.text)         # Conteúdo da resposta
+</pre>
+</div>
+
+<!-- flask -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-flask text-danger"></i>
+    <span class="topic-text">flask</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Framework minimalista para criar aplicações web e APIs REST. Fácil de usar, ideal para projetos rápidos ou interfaces web simples.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>from flask import Flask</pre>
+    <b>Exemplo:</b>
+    <pre># Cria aplicação web simples
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "Hello, Flask!"
+
+# Para rodar: descomente abaixo
+# app.run()
+</pre>
+</div>
+
+<!-- django -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-leaf text-success"></i>
+    <span class="topic-text">django</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Framework robusto para sites completos, com painel administrativo, ORM, autenticação e escalabilidade. Muito usado em sistemas profissionais.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre># Django é usado por comandos e módulos, exemplo de view:</pre>
+    <b>Exemplo:</b>
+    <pre># views.py
+from django.http import HttpResponse
+def home(request):
+    return HttpResponse("Página Django")
+</pre>
+</div>
+
+<!-- beautifulsoup4 -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-spider text-warning"></i>
+    <span class="topic-text">beautifulsoup4</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Biblioteca para extração (scraping), navegação e busca eficiente em HTML/XML de páginas web. Muito usada junto com requests.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>from bs4 import BeautifulSoup</pre>
+    <b>Exemplo:</b>
+    <pre># Lê HTML e pega texto de uma tag
+html = "&lt;h1&gt;Oi&lt;/h1&gt;"
+soup = BeautifulSoup(html, "html.parser")
+print(soup.h1.text)
+</pre>
+</div>
+
+<!-- openpyxl -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-file-excel text-success"></i>
+    <span class="topic-text">openpyxl</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    Ler, criar e editar arquivos do Excel (.xlsx) em Python, ideal para automações, relatórios e integração com planilhas.
+</p>
+<div class="example-block mb-2">
+    <b>Como importar:</b>
+    <pre>import openpyxl</pre>
+    <b>Exemplo:</b>
+    <pre># Cria nova planilha, escreve dado e salva
+wbook = openpyxl.Workbook()
+sheet = wbook.active
+sheet["A1"] = "Olá Excel!"
+wbook.save("exemplo.xlsx")
+</pre>
+</div>
+
+<!-- Outros (pip) -->
+<div class="topic-title mt-4 mb-2">
+    <i class="fa-solid fa-plug text-info"></i>
+    <span class="topic-text">Instalação com pip</span>
+</div>
+<p class="fs-3 mb-2">
+    <b>Para que serve?</b><br>
+    <code>pip</code> é o instalador oficial de pacotes do Python. Use para instalar qualquer biblioteca que não seja padrão da linguagem.
+</p>
+<div class="example-block mb-2">
+    <b>Para instalar qualquer biblioteca externa:</b>
+    <pre>pip install nome-da-biblioteca</pre>
+    <b>Exemplo para instalar pandas:</b>
+    <pre>pip install pandas</pre>
+</div>
+
+<!-- DESAFIO FINAL - BIBLIOTECAS MAIS USADAS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-trophy text-success"></i>
+    <span class="topic-text">Desafio Final: Projeto Multi-bibliotecas</span>
+</div>
+<p class="fs-3 mb-3">
+    <b>Desafio:</b> Monte um script profissional que:
+</p>
+<ul class="fs-3 mb-4">
+    <li>Lê um arquivo CSV com nomes e datas de nascimento</li>
+    <li>Calcula idade de cada pessoa e sorteia um nome aleatório</li>
+    <li>Gera um gráfico de quantas pessoas nasceram em cada mês</li>
+    <li>Salva um arquivo JSON com todos os resultados</li>
+    <li>Deve ser modular, usar funções e bibliotecas padrão e externas (csv, random, datetime, json, matplotlib)</li>
+</ul>
+<div class="example-block mb-5">
+    <b>Solução sugerida (comentada):</b>
+    <pre>
+import csv
+import random
+from datetime import datetime
+import json
+import matplotlib.pyplot as plt
+
+def ler_csv(arquivo):
+    """Lê CSV e retorna lista de pessoas (nome, data_nasc)"""
+    pessoas = []
+    with open(arquivo, encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            pessoas.append({"nome": row["nome"], "data_nasc": row["data_nasc"]})
+    return pessoas
+
+def calcular_idades(pessoas):
+    """Calcula idade de cada pessoa"""
+    hoje = datetime.now()
+    for p in pessoas:
+        nasc = datetime.strptime(p["data_nasc"], "%Y-%m-%d")
+        p["idade"] = hoje.year - nasc.year - ((hoje.month, hoje.day) < (nasc.month, nasc.day))
+    return pessoas
+
+def sorteio_nome(pessoas):
+    """Sorteia um nome aleatório"""
+    return random.choice(pessoas)["nome"]
+
+def grafico_nascimentos(pessoas):
+    """Gera gráfico de nascimentos por mês"""
+    meses = [0]*12
+    for p in pessoas:
+        nasc = datetime.strptime(p["data_nasc"], "%Y-%m-%d")
+        meses[nasc.month-1] += 1
+    plt.bar(range(1,13), meses)
+    plt.xlabel("Mês de nascimento")
+    plt.ylabel("Quantidade")
+    plt.title("Nascimentos por mês")
+    plt.show()
+
+def salvar_json(pessoas, nome_sorteado, arquivo="resultado.json"):
+    """Salva dados em JSON"""
+    with open(arquivo, "w", encoding="utf-8") as f:
+        json.dump({"pessoas": pessoas, "nome_sorteado": nome_sorteado}, f, ensure_ascii=False, indent=2)
+
+# Exemplo de uso (assume arquivo CSV com colunas "nome" e "data_nasc" no formato YYYY-MM-DD)
+pessoas = ler_csv("pessoas.csv")
+pessoas = calcular_idades(pessoas)
+nome_sorteado = sorteio_nome(pessoas)
+grafico_nascimentos(pessoas)
+salvar_json(pessoas, nome_sorteado)
+print(f"Nome sorteado: {nome_sorteado}")
+    </pre>
+</div>
+
+<style>
+.topic-title {
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: #1976d2;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+.topic-title .fa-solid {
+    font-size: 2.0rem;
+}
+.topic-title .topic-text {
+    font-size: 2.1rem;
+}
+.code-pill {
+    background: #e3f2fd;
+    border-radius: 7px;
+    padding: 5px 16px;
+    font-size: 1.12rem;
+    color: #1976d2;
+    margin-left: 7px;
+    margin-right: 7px;
+    font-family: 'Fira Mono', monospace;
+}
+.example-block {
+    background: #fffbe7;
+    border-left: 6px solid #ffd600;
+    border-radius: 14px;
+    padding: 16px 30px 14px 30px;
+    font-size: 1.18rem;
+    margin-top: 10px;
+}
+.example-block pre {
+    background: #e3f2fd;
+    border-radius: 9px;
+    font-size: 1.11rem;
+    padding: 8px 14px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+}
+.fs-3 { font-size: 1.31rem !important; }
+ul.fs-3 li { margin-bottom: 6px; }
+@media (max-width: 1200px) {
+    .example-block { padding-left: 7px; padding-right: 7px;}
+}
+@media (max-width: 900px) {
+    .topic-title { font-size: 1.05rem; }
+    .topic-title .fa-solid { font-size: 1.05rem; }
+    .topic-title .topic-text { font-size: 1.05rem;}
+    .fs-3 { font-size: 0.95rem !important; }
+    .example-block { font-size: 0.92rem;}
+}
+</style>

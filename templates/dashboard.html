@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Aluno - Plataforma Python</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+    body { background: #f5f7fa; margin: 0; }
+    .main-content {
+        margin-left: 220px;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f5f7fa;
+    }
+    .medals-panel {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 18px #1565c025;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        gap: 42px;
+        width: 100%;
+        max-width: 420px;
+        justify-content: center;
+        margin-bottom: 36px;
+    }
+    .medal {
+        display: flex; flex-direction: column; align-items: center; gap: 2px;
+        min-width: 65px;
+        font-size: 0.98rem;
+        color: #222;
+    }
+    .medal .fa-medal { font-size: 2rem; margin-bottom: 3px; }
+    .medal.gold .fa-medal { color: #ffd700; filter: drop-shadow(0 1px 2px #ffd60055);}
+    .medal.silver .fa-medal { color: #c0c0c0; }
+    .medal.bronze .fa-medal { color: #cd7f32; }
+    .medal .count { font-weight: bold; color: #1565c0; font-size: 1.1rem; }
+    .medal-label { font-size: 1.01rem; color: #444; margin-top: 0; text-align: center; font-weight:600 }
+    .dashboard-welcome {
+        background: #e3f2fd;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+        padding: 42px 38px 30px 38px;
+        max-width: 540px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .dashboard-welcome h1 {
+        font-size: 2.1rem;
+        color: #1976d2;
+        font-weight: 900;
+        margin-bottom: 10px;
+        letter-spacing: .5px;
+        line-height: 1.18;
+    }
+    .dashboard-welcome p { font-size: 1.11rem; color: #21222c; margin-bottom: 10px; font-weight: 500;}
+    .dashboard-welcome ul { font-size: 1.07rem; margin-bottom: 16px; padding-left: 1.25em;}
+    .dashboard-welcome ul li { margin-bottom: 7px; line-height: 1.5;}
+    .dashboard-welcome ul li b, 
+    .dashboard-welcome ul li .text-blue,
+    .dashboard-welcome ul li .text-gold,
+    .dashboard-welcome ul li .text-orange { font-weight: 700; }
+    .text-blue { color: #1976d2; }
+    .text-gold { color: #ffd600; }
+    .text-orange { color: #ff9800; }
+    .quick-actions {
+        display: flex; gap: 18px; margin-top: 12px; flex-wrap: wrap;
+    }
+    .quick-actions a {
+        font-size: 1.11rem; font-weight: 700; padding: 12px 28px; border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(21,101,192,0.10);
+        transition: background .18s, color .18s, transform .18s;
+        display: inline-flex; align-items: center; gap: 8px; border: none; text-decoration: none;
+    }
+    .quick-actions a.btn-yellow { background: #ffd600; color: #333; }
+    .quick-actions a.btn-yellow:hover { background: #ffe066; color: #1976d2; }
+    .quick-actions a.btn-blue { background: #1976d2; color: #fff; }
+    .quick-actions a.btn-blue:hover { background: #1256a3; color: #ffd600; }
+    @media (max-width: 900px) {
+        .main-content { margin-left:0; padding: 28px 0;}
+        .medals-panel, .dashboard-welcome { max-width: 98vw; }
+    }
+    @media (max-width: 650px) {
+        .dashboard-welcome, .medals-panel { padding: 13px 2vw;}
+        .dashboard-welcome h1 { font-size: 1.23rem;}
+    }
+    </style>
+</head>
+<body>
+{% include 'sidebar.html' %}
+<div class="main-content">
+    <div class="medals-panel">
+        <div class="medal gold">
+            <i class="fa-solid fa-medal"></i>
+            <span class="count">{{ g.medalhas_ouro }}</span>
+            <span class="medal-label">Ouro</span>
+        </div>
+        <div class="medal silver">
+            <i class="fa-solid fa-medal"></i>
+            <span class="count">{{ g.medalhas_prata }}</span>
+            <span class="medal-label">Prata</span>
+        </div>
+        <div class="medal bronze">
+            <i class="fa-solid fa-medal"></i>
+            <span class="count">{{ g.medalhas_bronze }}</span>
+            <span class="medal-label">Bronze</span>
+        </div>
+    </div>
+    <div class="dashboard-welcome">
+        <h1>Bem-vindo, {{ current_user.nome }}!</h1>
+        <p>
+            <b>Esta é a plataforma mais divertida para aprender Python!</b>
+            <br>O que você vai encontrar aqui:
+        </p>
+        <ul>
+            <li><span class="text-blue">Apostila interativa</span> com teoria, exemplos visuais, códigos comentados e dicas práticas.</li>
+            <li><span class="text-orange">Desafios interativos</span> para praticar e ganhar pontos!</li>
+            <li><span class="text-gold">Acompanhe sua evolução</span> e conquiste medalhas resolvendo missões!</li>
+        </ul>
+        <div class="quick-actions">
+            <a href="{{ url_for('apostilas') }}" class="btn-yellow">
+                <i class="fa-solid fa-book"></i> Apostila (Curso)
+            </a>
+            <a href="{{ url_for('select') }}" class="btn-blue">
+                <i class="fa-solid fa-list-check"></i> Desafios
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

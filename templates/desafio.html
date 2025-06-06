@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Desafio Python</title>
+    <style>
+        .sucesso { color: green; }
+        .erro { color: red; }
+        .oculto { display: none; }
+    </style>
+</head>
+<body>
+    <h1>{{ desafio['description'] }}</h1>
+    <form id="form-executar">
+        <textarea id="codigo" name="codigo" rows="10" cols="60">{{ desafio['starter_code'] }}</textarea><br>
+        <label>Entrada padrão (stdin):<br>
+        <input id="input_data" name="input_data" value=""></label><br><br>
+        <button type="button" id="executarBtn">Executar</button>
+        <button type="button" id="proximoBtn" class="oculto">Próximo desafio</button>
+    </form>
+    <pre id="saida"></pre>
+    <div id="mensagem"></div>
+
+    <script>
+    document.getElementById("executarBtn").onclick = function() {
+        let codigo = document.getElementById("codigo").value;
+        let input_data = document.getElementById("input_data").value;
+        let desafio_id = "{{ desafio['id'] }}";
+        let formData = new FormData();
+        formData.append("codigo", codigo);
+        formData.append("input_data", input_data);
+        formData.append("desafio_id", desafio_id);
+
+        fetch("/executar", { method: "POST", body: formData })
+        .then(resp => resp.json())
+        .then(resposta => {
+            document.getElementById("saida").textContent = resposta.saida || "";
+            if (resposta.sucesso) {
+                document.getElementById("mensagem").innerHTML = '<span class="sucesso">'+resposta.mensagem+'</span>';
+                document.getElementById("proximoBtn").classList.remove("oculto");
+                document.getElementById("executarBtn").disabled = true;
+            } else {
+                document.getElementById("mensagem").innerHTML = '<span class="erro">'+(resposta.erro || resposta.mensagem)+'</span>';
+            }
+        });
+    };
+    document.getElementById("proximoBtn").onclick = function() {
+        window.location.href = "/proximo_desafio"; // Ajuste conforme seu roteamento
+    }
+    </script>
+</body>
+</html>

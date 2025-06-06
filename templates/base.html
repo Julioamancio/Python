@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Desafios Python{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <!-- Font Awesome 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f6f7fb 0%, #dbeafe 100%);
+            position: relative;
+            padding-bottom: 48px; /* espaço para o footer fixo */
+        }
+        .navbar-custom {
+            min-height: 56px;
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,.05);
+            background: #fff;
+        }
+        .main-card {
+            max-width: 900px;
+            min-width: 350px;
+            width: 100%;
+            margin: 48px auto 0 auto;
+            border-radius: 22px;
+            box-shadow: 0 8px 36px rgba(0,0,0,0.08);
+        }
+        .card-header {
+            border-radius: 22px 22px 0 0 !important;
+            font-size: 1.20rem;
+            font-weight: 600;
+            min-height: 58px;
+        }
+        @media (max-width: 991px) {
+            .main-card { max-width: 98vw; }
+        }
+        @media (max-width: 767px) {
+            .main-card { margin: 0; border-radius: 0;}
+            .card-header { border-radius: 0 !important; }
+        }
+        /* Rodapé fixo profissional */
+        .footer-julio {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100vw;
+            background: #1976d2;
+            color: #fff;
+            text-align: right;
+            padding: 0 38px 0 0;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 1.11rem;
+            z-index: 99;
+            box-shadow: 0 -3px 12px #1976d211;
+            letter-spacing: 0.1px;
+        }
+        .footer-signature {
+            font-weight: 500;
+            font-family: 'Fira Sans', 'Inter', Arial, sans-serif;
+            opacity: .93;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+        .footer-signature .fa-code {
+            color: #ffd600;
+            font-size: 1.19rem;
+            margin-bottom: 1.5px;
+        }
+        @media (max-width: 900px) {
+            .footer-julio { font-size: .98rem; padding-right: 10px; height: 35px;}
+            .footer-signature .fa-code { font-size: 1.09rem;}
+        }
+    </style>
+    {% block head_extras %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-expand px-3">
+        <a class="navbar-brand fw-bold text-primary" href="/select">
+            <i class="fa-brands fa-python"></i> Desafios Python
+        </a>
+        <div class="ms-auto d-flex align-items-center gap-2">
+            {% if current_user.is_authenticated %}
+                <span class="fw-semibold text-secondary d-none d-md-inline">
+                    <i class="fa-solid fa-user"></i> {{ current_user.nome }} ({{ current_user.turma }})
+                </span>
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm ms-2" title="Sair" style="font-weight:600;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="container mt-3">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    <div>{{ message }}</div>
+                {% endfor %}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+
+    <!-- Rodapé fixo -->
+    <footer class="footer-julio">
+        <div>
+            <span class="footer-signature">
+                <i class="fa-solid fa-code"></i> feito por <b>Júlio Amâncio</b>
+            </span>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

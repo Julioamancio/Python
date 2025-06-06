@@ -1,0 +1,506 @@
+<!-- Nível Intermediário - Apostila Python (3 exemplos por tópico) -->
+
+<!-- DICIONÁRIOS (dict) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-table-list text-primary"></i>
+    <span class="topic-text">Dicionários (<code>dict</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Dicionários são estruturas que armazenam valores associados a uma chave. Eles permitem acessar, adicionar, modificar e remover informações rapidamente usando a chave (que pode ser string, número, etc). São ideais para representar objetos, cadastros e estruturas de dados com campos nomeados.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Dicionário com 3 chaves
+carro = {"marca": "Ford", "modelo": "Ka", "ano": 2018}
+print(carro["marca"])     # Ford</pre>
+    <b>Exemplo 2:</b>
+    <pre># Adicionando campos em um dicionário vazio
+d = {}
+d["nome"] = "Ana"
+d["idade"] = 22
+print(d)  # {'nome': 'Ana', 'idade': 22}</pre>
+    <b>Exemplo 3:</b>
+    <pre># Dicionário pode guardar listas e tipos mistos
+aluno = {"nome": "Lucas", "notas": [8, 7, 9]}
+aluno["aprovado"] = True   # adiciona novo campo "aprovado"
+print(aluno)</pre>
+</div>
+
+<!-- TUPLAS (tuple) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-circle-nodes text-success"></i>
+    <span class="topic-text">Tuplas (<code>tuple</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Tuplas são sequências imutáveis, ou seja, seus valores não podem ser alterados após a criação. São usadas para representar dados fixos (como coordenadas, datas, registros temporários) e são mais rápidas e seguras em alguns casos do que listas.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Tupla de dois valores
+coordenada = (10, 20)
+print(coordenada[0])  # 10</pre>
+    <b>Exemplo 2:</b>
+    <pre># Tupla com vários itens pode ser iterada
+dias = ("Seg", "Ter", "Qua")
+for dia in dias:
+    print(dia)</pre>
+    <b>Exemplo 3:</b>
+    <pre># Atenção: tupla de um elemento precisa da vírgula
+cores = ("azul",)
+print(type(cores)) # <class 'tuple'> 
+    </pre>
+</div>
+
+<!-- CONJUNTOS (set) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-layer-group text-warning"></i>
+    <span class="topic-text">Conjuntos (<code>set</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Conjuntos são coleções não ordenadas e que não permitem elementos repetidos. Servem para eliminar duplicatas rapidamente, fazer operações matemáticas de conjunto (união, interseção...) e para testar pertinência eficiente.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Elementos duplicados são ignorados
+s = {1, 2, 2, 3}
+print(s)  # {1, 2, 3}</pre>
+    <b>Exemplo 2:</b>
+    <pre># Interseção de conjuntos (elementos comuns)
+a = {1, 2, 3}
+b = {3, 4, 5}
+print(a & b)  # {3}</pre>
+    <b>Exemplo 3:</b>
+    <pre># Eliminar duplicatas de uma lista
+lista = [1, 2, 2, 3, 1]
+sem_duplicatas = set(lista)
+print(sem_duplicatas)  # {1, 2, 3}</pre>
+</div>
+
+<!-- LIST COMPREHENSIONS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-list-check text-info"></i>
+    <span class="topic-text">List Comprehensions</span>
+</div>
+<p class="fs-3 mb-4">
+    List comprehensions são uma maneira concisa de criar listas a partir de laços e condições, tudo em uma linha. Tornam o código mais limpo e eficiente para transformar ou filtrar dados.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Lista dos quadrados de 1 a 5
+quadrados = [x*x for x in range(1, 6)]
+print(quadrados)</pre>
+    <b>Exemplo 2 (com condição):</b>
+    <pre># Apenas números pares de 0 a 9
+pares = [n for n in range(10) if n % 2 == 0]
+print(pares)</pre>
+    <b>Exemplo 3 (com string):</b>
+    <pre># Pega a inicial de cada nome
+iniciais = [nome[0] for nome in ["Ana", "Bia", "Carlos"]]
+print(iniciais)</pre>
+</div>
+
+<!-- MANIPULAÇÃO DE ARQUIVOS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-file-lines text-danger"></i>
+    <span class="topic-text">Manipulação de Arquivos (<code>open, read, write, with</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Para ler e escrever arquivos de texto, use a função <code>open()</code>. O comando <code>with</code> garante que o arquivo será fechado ao final do bloco, evitando problemas na manipulação de dados e consumo de recursos.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (leitura):</b>
+    <pre># Lê todo o conteúdo do arquivo
+with open("texto.txt", "r") as f:
+    print(f.read())</pre>
+    <b>Exemplo 2 (escrita):</b>
+    <pre># Cria novo arquivo ou sobrescreve existente
+with open("novo.txt", "w") as f:
+    f.write("Hello!")</pre>
+    <b>Exemplo 3 (linha a linha):</b>
+    <pre># Lê arquivo linha por linha (útil para arquivos grandes)
+with open("texto.txt") as f:
+    for linha in f:
+        print(linha.strip())  # strip remove o '\n'</pre>
+</div>
+
+<!-- FUNÇÕES COM PARÂMETROS E RETORNO -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-arrow-right-arrow-left text-info"></i>
+    <span class="topic-text">Funções com Parâmetros e Retorno</span>
+</div>
+<p class="fs-3 mb-4">
+    Funções podem receber dados (parâmetros/argumentos) e devolver resultados (usando <code>return</code>). São essenciais para dividir e reaproveitar código.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Função que soma dois números recebidos
+def soma(a, b):
+    return a + b
+print(soma(2, 2))</pre>
+    <b>Exemplo 2:</b>
+    <pre># Função que multiplica dois valores e retorna o resultado
+def multiplica(x, y):
+    return x * y
+r = multiplica(3, 4)
+print(r)</pre>
+    <b>Exemplo 3:</b>
+    <pre># Função que recebe dois parâmetros e monta uma frase
+def saudacao(nome, mensagem):
+    return f"{mensagem}, {nome}!"
+print(saudacao("Lucas", "Oi"))</pre>
+</div>
+
+<!-- PARÂMETROS PADRÃO E NOMEADOS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-sliders text-warning"></i>
+    <span class="topic-text">Parâmetros Padrão e Nomeados</span>
+</div>
+<p class="fs-3 mb-4">
+    Parâmetros padrão permitem definir um valor a ser usado se o argumento não for informado. Parâmetros nomeados facilitam a clareza ao chamar funções.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (padrão):</b>
+    <pre># Parâmetro msg tem valor padrão "Oi"
+def mostra(msg="Oi"):
+    print(msg)
+mostra()      # Usa o padrão
+mostra("Olá") # Sobrescreve</pre>
+    <b>Exemplo 2 (nomeado):</b>
+    <pre># O parâmetro b pode ser informado pelo nome
+def soma(a, b=10):
+    return a + b
+print(soma(5))       # Usa b=10
+print(soma(5, 1))    # Usa b=1</pre>
+    <b>Exemplo 3:</b>
+    <pre># Pode informar qualquer parâmetro pelo nome
+def info(nome, idade=0):
+    print(nome, idade)
+info("Ana")
+info("Bia", idade=20)</pre>
+</div>
+
+<!-- ESCOPO DE VARIÁVEIS (LOCAL E GLOBAL) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-globe text-success"></i>
+    <span class="topic-text">Escopo de Variáveis (Local e Global)</span>
+</div>
+<p class="fs-3 mb-4">
+    O escopo determina onde uma variável pode ser usada. Variáveis criadas dentro de funções são <b>locais</b> (existem só lá dentro). Variáveis criadas fora são <b>globais</b>. Para alterar uma variável global dentro da função, use <code>global</code>.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (local):</b>
+    <pre># x só existe dentro da função
+def teste():
+    x = 2
+    print(x)
+teste()
+# print(x)  # Erro: x não existe fora da função</pre>
+    <b>Exemplo 2 (global):</b>
+    <pre># global permite alterar variável fora da função
+y = 0
+def altera():
+    global y
+    y = 5
+altera()
+print(y)  # 5</pre>
+    <b>Exemplo 3 (local x global):</b>
+    <pre># Variável local "num" não afeta a global
+num = 1
+def func():
+    num = 9
+    print("Local:", num)
+func()
+print("Global:", num)</pre>
+</div>
+
+<!-- MÓDULOS E PACOTES -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-boxes-stacked text-primary"></i>
+    <span class="topic-text">Módulos e Pacotes (<code>import, from</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Módulos são arquivos Python reutilizáveis (por exemplo, <code>math.py</code>, <code>util.py</code>). Pacotes são pastas com vários módulos. Use <code>import</code> ou <code>from ... import ...</code> para reutilizar códigos prontos ou dividir seu projeto.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Importa todo o módulo math
+import math
+print(math.sqrt(25))</pre>
+    <b>Exemplo 2:</b>
+    <pre># Importa só a função randint de random
+from random import randint
+print(randint(1, 10))</pre>
+    <b>Exemplo 3:</b>
+    <pre># Importa módulo com apelido
+import datetime as dt
+print(dt.datetime.now())</pre>
+</div>
+
+<!-- ESTRUTURA DE PROJETOS SIMPLES -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-folder-open text-info"></i>
+    <span class="topic-text">Estrutura de Projetos Simples</span>
+</div>
+<p class="fs-3 mb-4">
+    Organizar seu projeto em arquivos e pastas deixa o código mais limpo e facilita manutenção, testes e crescimento do sistema.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Projeto com um arquivo principal e um utilitário
+meuprojeto/
+├── main.py
+├── util.py
+    </pre>
+    <b>Exemplo 2 (com pasta):</b>
+    <pre># Projeto com subpasta de funções
+meuprojeto/
+├── main.py
+├── funcoes/
+│   └── calculos.py
+    </pre>
+    <b>Exemplo 3 (com dados):</b>
+    <pre># Projeto com dados separados
+meuprojeto/
+├── main.py
+├── dados/
+│   └── usuarios.csv
+    </pre>
+</div>
+
+<!-- TRATAMENTO DE ERROS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+    <span class="topic-text">Tratamento de Erros (<code>try, except, finally</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    O tratamento de erros evita que o programa pare inesperadamente. Use <code>try</code> para testar um bloco, <code>except</code> para capturar erros, e <code>finally</code> para executar algo sempre ao final.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Captura divisão por zero
+try:
+    x = int(input("Digite um número: "))
+    print(10 / x)
+except ZeroDivisionError:
+    print("Erro: divisão por zero!")</pre>
+    <b>Exemplo 2:</b>
+    <pre># Captura erro ao abrir arquivo inexistente
+try:
+    arquivo = open("inexistente.txt")
+except FileNotFoundError:
+    print("Arquivo não encontrado!")</pre>
+    <b>Exemplo 3:</b>
+    <pre># finally executa sempre (erro ou não)
+try:
+    n = int(input("Número: "))
+finally:
+    print("Sempre executa, erro ou não!")</pre>
+</div>
+
+<!-- ITERADORES E GERADORES (yield) -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-rotate text-primary"></i>
+    <span class="topic-text">Iteradores e Geradores (<code>yield</code>)</span>
+</div>
+<p class="fs-3 mb-4">
+    Iteradores percorrem coleções elemento a elemento. Geradores são funções que produzem valores sob demanda usando <code>yield</code> e economizam memória em listas grandes.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Gerador simples
+def contador():
+    for i in range(3):
+        yield i
+for n in contador():
+    print(n)</pre>
+    <b>Exemplo 2:</b>
+    <pre># Gerador de números pares até limite
+def pares(limite):
+    n = 0
+    while n <= limite:
+        yield n
+        n += 2
+for p in pares(6):
+    print(p)</pre>
+    <b>Exemplo 3:</b>
+    <pre># Gerador de letras em uma string
+def letras():
+    for c in "abc":
+        yield c
+print(list(letras()))</pre>
+</div>
+
+<!-- FATIAMENTO AVANÇADO DE LISTAS E STRINGS -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-scissors text-success"></i>
+    <span class="topic-text">Fatiamento Avançado de Listas e Strings</span>
+</div>
+<p class="fs-3 mb-4">
+    Fatiamento permite pegar partes de listas ou strings usando <code>[início:fim:passo]</code>. Útil para manipular dados, inverter sequências e criar subconjuntos.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Pega elementos entre as posições 2 e 4
+lista = [0,1,2,3,4,5]
+print(lista[2:5])      # [2, 3, 4]</pre>
+    <b>Exemplo 2:</b>
+    <pre># Inverte uma string usando passo negativo
+texto = "python"
+print(texto[::-1])     # nohtyp</pre>
+    <b>Exemplo 3:</b>
+    <pre># Pega só os pares de uma lista
+lista = list(range(10))
+print(lista[::2])      # [0,2,4,6,8]</pre>
+</div>
+
+<!-- EXPRESSÕES LAMBDA -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-bolt text-warning"></i>
+    <span class="topic-text">Expressões <code>lambda</code></span>
+</div>
+<p class="fs-3 mb-4">
+    Expressões <code>lambda</code> criam funções anônimas (sem nome) de forma rápida, geralmente para usar como argumento em funções como <code>map</code>, <code>filter</code> e <code>sort</code>.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1:</b>
+    <pre># Função lambda para dobrar valor
+dobro = lambda x: x*2
+print(dobro(7))</pre>
+    <b>Exemplo 2:</b>
+    <pre># Lambda para filtrar valores
+filtro = lambda x: x > 10
+print(filtro(12))  # True</pre>
+    <b>Exemplo 3:</b>
+    <pre># Ordenando por tamanho da palavra
+palavras = ["sol", "lua", "estrela"]
+palavras.sort(key=lambda w: len(w))
+print(palavras)</pre>
+</div>
+
+<!-- FUNÇÕES map(), filter(), zip(), enumerate() -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-list-ol text-info"></i>
+    <span class="topic-text">Funções <code>map()</code>, <code>filter()</code>, <code>zip()</code>, <code>enumerate()</code></span>
+</div>
+<p class="fs-3 mb-4">
+    Essas funções ajudam a manipular coleções de dados de forma funcional:
+    <br>
+    <b>map()</b>: aplica função a cada item da lista;
+    <b>filter()</b>: filtra itens conforme condição;
+    <b>zip()</b>: junta listas na ordem;
+    <b>enumerate()</b>: numera itens de uma lista.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (map):</b>
+    <pre># Multiplica cada número por 10
+numeros = [1, 2, 3]
+res = list(map(lambda x: x*10, numeros))
+print(res)</pre>
+    <b>Exemplo 2 (filter):</b>
+    <pre># Filtra apenas os pares do range
+pares = list(filter(lambda x: x%2 == 0, range(6)))
+print(pares)</pre>
+    <b>Exemplo 3 (zip/enumerate):</b>
+    <pre># Junta listas e enumera os pares
+nomes = ["Ana", "Bia"]
+idades = [15, 16]
+for i, (nome, idade) in enumerate(zip(nomes, idades)):
+    print(i, nome, idade)
+    </pre>
+</div>
+
+<!-- DESAFIO FINAL DO NÍVEL INTERMEDIÁRIO -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-trophy text-success"></i>
+    <span class="topic-text">Desafio Final do Nível Intermediário</span>
+</div>
+<p class="fs-3 mb-3">
+    <b>Desafio:</b> Crie um programa que:
+</p>
+<ul class="fs-3 mb-4">
+    <li>Leia nomes e notas de 3 alunos usando dicionários e listas;</li>
+    <li>Mostre a média de cada aluno;</li>
+    <li>Ao final, mostre a média geral da turma.</li>
+</ul>
+<div class="example-block mb-5">
+    <b>Solução sugerida (comentada):</b>
+    <pre>
+# Lista para armazenar cada aluno e suas notas
+alunos = []
+for _ in range(3):
+    nome = input("Nome: ")
+    notas = []
+    for i in range(2):
+        n = float(input(f"Nota {i+1}: "))
+        notas.append(n)
+    aluno = {"nome": nome, "notas": notas}
+    alunos.append(aluno)
+
+# Calcula média de cada aluno e soma para geral
+media_geral = 0
+for aluno in alunos:
+    media = sum(aluno["notas"])/len(aluno["notas"])
+    print(f'{aluno["nome"]} - Média: {media:.1f}')
+    media_geral += media
+
+media_geral /= len(alunos)
+print(f"Média geral da turma: {media_geral:.1f}")
+    </pre>
+</div>
+
+<style>
+.topic-title {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: #1976d2;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+.topic-title .fa-solid {
+    font-size: 2.1rem;
+}
+.topic-title .topic-text {
+    font-size: 2.3rem;
+}
+.code-pill {
+    background: #e3f2fd;
+    border-radius: 7px;
+    padding: 5px 16px;
+    font-size: 1.22rem;
+    color: #1976d2;
+    margin-left: 7px;
+    margin-right: 7px;
+    font-family: 'Fira Mono', monospace;
+}
+.example-block {
+    background: #fffbe7;
+    border-left: 6px solid #ffd600;
+    border-radius: 14px;
+    padding: 20px 36px 17px 36px;
+    font-size: 1.29rem;
+    margin-top: 10px;
+}
+.example-block pre {
+    background: #e3f2fd;
+    border-radius: 9px;
+    font-size: 1.21rem;
+    padding: 10px 16px;
+    margin-bottom: 13px;
+    margin-top: 7px;
+    font-family: 'Fira Mono', 'Consolas', monospace;
+}
+.fs-3 { font-size: 1.55rem !important; }
+ul.fs-3 li { margin-bottom: 6px; }
+@media (max-width: 1200px) {
+    .example-block { padding-left: 10px; padding-right: 10px;}
+}
+@media (max-width: 900px) {
+    .topic-title { font-size: 1.3rem; }
+    .topic-title .fa-solid { font-size: 1.25rem; }
+    .topic-title .topic-text { font-size: 1.19rem;}
+    .fs-3 { font-size: 1.10rem !important; }
+    .example-block { font-size: 1.09rem;}
+}
+</style>
