@@ -1,6 +1,6 @@
-Flask
-Flask-Login
-Flask-SQLAlchemy
-Werkzeug
-Flask-Mail
-gunicorn
+Flask>=2.2.0
+Flask-Login>=0.6.2
+Flask-SQLAlchemy>=3.0.0
+Werkzeug>=2.2.0
+Flask-Mail>=0.9.1
+gunicorn>=21.2.0
