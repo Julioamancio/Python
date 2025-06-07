@@ -23,9 +23,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = 'smtp.seuprovedor.com'  # Ex: smtp.gmail.com
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'SEU_EMAIL@dominio.com'
-app.config['MAIL_PASSWORD'] = 'SUA_SENHA_DE_APLICATIVO'
-app.config['MAIL_DEFAULT_SENDER'] = 'SEU_EMAIL@dominio.com'
+app.config['MAIL_USERNAME'] = 'julioamancio2014@gmail.com'
+app.config['MAIL_PASSWORD'] = 'bbkdgkdekincbdlq'
+app.config['MAIL_DEFAULT_SENDER'] = 'julioamancio2014@gmail.com'
 
 mail = Mail(app)
 db = SQLAlchemy(app)
@@ -303,7 +303,7 @@ def send_subject_report(aluno, subject, desafios, pontos_total):
 
     msg = Message(
         subject=f"[Relatório] {aluno.nome} finalizou o assunto {subject}",
-        recipients=['SEU_EMAIL@dominio.com', aluno.email],
+        recipients=['julioamancio2014@gmail.com', aluno.email],
         html=html
     )
     mail.send(msg)
