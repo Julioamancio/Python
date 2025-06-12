@@ -2,19 +2,27 @@
 {% block title %}Cadastro{% endblock %}
 {% block content %}
 <div class="container d-flex justify-content-center align-items-center" style="min-height:calc(100vh - 56px)">
-    <div class="card main-card border-0 w-100 position-relative">
-        <div class="card-header bg-info text-white text-center">
-            <i class="fa-solid fa-user-plus me-2"></i> Cadastro
+    <div class="card shadow-lg border-0 mx-auto" style="max-width: 400px; width: 100%; border-radius: 20px;">
+        <div class="card-header bg-info text-white text-center" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            <i class="fa-solid fa-user-plus me-2"></i>
+            <span class="fw-bold">Crie sua conta</span>
         </div>
-        <div class="card-body bg-white">
+        <div class="card-body bg-white px-4 py-4">
+            <div class="text-center mb-4">
+                <i class="fa-solid fa-address-card fa-2x text-info mb-2"></i>
+                <h3 class="fw-semibold mb-1" style="font-size: 1.5rem;">Bem-vindo!</h3>
+                <p class="text-muted mb-0" style="font-size: 1rem;">
+                    Cadastre-se para acessar desafios, acompanhar seu progresso e participar da comunidade.
+                </p>
+            </div>
             <form method="post">
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
-                    <input name="nome" class="form-control" required>
+                    <input name="nome" class="form-control" required placeholder="Digite seu nome completo">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <input name="email" type="email" class="form-control" required>
+                    <input name="email" type="email" class="form-control" required placeholder="Digite seu email">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Turma</label>
@@ -22,14 +30,25 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Senha</label>
-                    <input name="senha" type="password" class="form-control" required>
+                    <input name="senha" type="password" class="form-control" required placeholder="Crie uma senha segura">
                 </div>
-                <button class="btn btn-info w-100"><i class="fa-solid fa-user-plus"></i> Cadastrar</button>
+                <button class="btn btn-info w-100 fw-bold">
+                    <i class="fa-solid fa-user-plus"></i> Cadastrar
+                </button>
             </form>
             <div class="text-center mt-3">
-                <a href="{{ url_for('login') }}">Já tem cadastro? Login</a>
+                <span class="text-muted">Já tem cadastro?</span>
+                <a href="{{ url_for('login') }}" class="fw-semibold">Login</a>
             </div>
         </div>
     </div>
 </div>
+<style>
+    body {
+        background: radial-gradient(circle at 60% 40%, #e6f0fb 60%, #f8fafd 100%);
+    }
+    .main-card {
+        box-shadow: 0 8px 32px 0 rgba(60, 120, 240, 0.12), 0 1.5px 3px 0 rgba(0,0,0,.06);
+    }
+</style>
 {% endblock %}
