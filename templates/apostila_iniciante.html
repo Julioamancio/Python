@@ -266,6 +266,36 @@ print("banana".endswith("ana"))  # True
 
 <!-- FIM PRINCIPAIS MÉTODOS DE STRING -->
 
+<!-- LAÇO DE REPETIÇÃO WHILE -->
+<div class="topic-title mt-5 mb-2">
+    <i class="fa-solid fa-rotate-left text-primary"></i>
+    <span class="topic-text">Laço de Repetição <code>while</code></span>
+</div>
+<p class="fs-3 mb-4">
+    O <code>while</code> repete um bloco de código enquanto a condição for <b>True</b>. Use para executar comandos várias vezes quando não sabe exatamente o número de repetições.
+</p>
+<div class="example-block mb-2">
+    <b>Exemplo 1 (contando de 1 até 5):</b>
+    <pre># Conta de 1 até 5
+contador = 1
+while contador <= 5:
+    print(contador)
+    contador = contador + 1  # ou contador += 1</pre>
+    <b>Exemplo 2 (pedindo senha até acertar):</b>
+    <pre># Repete até acertar a senha
+senha = ""
+while senha != "python123":
+    senha = input("Digite a senha: ")
+print("Acesso liberado!")</pre>
+    <b>Exemplo 3 (usando break para parar):</b>
+    <pre># Sai do laço com break
+while True:
+    comando = input("Digite 'sair' para terminar: ")
+    if comando == "sair":
+        break
+print("Programa encerrado!")</pre>
+</div>
+
 <!-- FUNÇÕES SIMPLES (def, return) -->
 <div class="topic-title mt-5 mb-2">
     <i class="fa-solid fa-arrow-up-right-dots text-danger"></i>
